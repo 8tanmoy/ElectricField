@@ -1,7 +1,10 @@
+#--convergence test for electric field with cutoff radius--
+#--generate data for one trajectory frame using field_space_rcut.py--
+
 import pandas as pd
 import numpy as np
 
-numRcut 	= 75
+numRcut 	= 75	#number of r points
 fnames 		= [ f'./rcut_{ii}/field_nointra.dat' for ii in range(numRcut) ]
 dataframes	= [ pd.read_csv(fname, header=None, sep=' ') for fname in fnames]
 means		= [ df.mean(axis=0) for df in dataframes ]
