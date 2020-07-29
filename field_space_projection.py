@@ -6,9 +6,9 @@
 tasks
 _____
 for each time:
-    1. decomposition of electric field
-    2. implement group-based cutoff
-    3. make sure the layer on the opposite side is not taken into account
+    1. decomposition of electric field into intramolecular, cation, anion, ligand and (cation+anion)=noIntra
+    2. implement simple coulomb-based electric field atom-based
+    3. make sure the layer on the opposite side is not taken into account by setting rcut=3.5 nm
 """
 import shutil
 import matplotlib.pyplot as plt
