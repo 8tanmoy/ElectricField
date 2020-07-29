@@ -1,6 +1,7 @@
 
-#--field calculation second version--
-#--tanmoy jun 19, 2020--
+#--field calculation at N atoms of MBN nitriles on Au slab--
+#--trajectories on root and calculation on drf=root/field_time/--
+#--initially tanmoy jun 19, 2020--
 """
 tasks
 _____
@@ -23,7 +24,7 @@ np.set_printoptions(threshold=sys.maxsize)
 gro2si = 1.602176 * 9.0 * 0.1
 #print(f"gro2si = {gro2si}")
 
-root    =   '/projectnb/cui-buchem/tanmoy/projects/ionic_liquids/setup_may2/1_emim_ace/'
+root    =   'add_root_here'
 drf     =   root + 'field_time'
 wrk     =   os.getcwd()
 r_cut   =   3.5
@@ -44,7 +45,7 @@ def process_gro(coord_path):
     molinfo = list()        #information array
     #--06/22--
     for jj in arr:
-        temp_resid      = jj[0:5].strip()
+        temp_resid      = jj[0:5].strip()       #standard gromacs file format
         temp_resname    = jj[5:10].strip()
         temp_atname     = jj[10:15].strip()
         temp_idx        = jj[15:20].strip()
