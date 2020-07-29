@@ -1,12 +1,12 @@
-#--field calculation second version--
+#--field calculation for convergence test--
 #--tanmoy jun 19, 2020--
+#--intra-CN removed upon upload jul 29, 2020--
+
 """
 tasks
 _____
-for each time:
-    1. decomposition of electric field
-    2. implement group-based cutoff
-    3. make sure the layer on the opposite side is not taken into account
+for each rcut:
+    1. decomposition of the electric field. output just the field due to cation + anion
 """
 import shutil
 import matplotlib.pyplot as plt
@@ -178,9 +178,9 @@ def calc_field(refIndex, noGold, boxDim, chargeList, rcut):
     fIntra      = gro2si * np.array([fIntraX, fIntraY, fIntraZ])
     fLigand     = gro2si * np.array([fLigandX, fLigandY, fLigandZ])
     fCation     = gro2si * np.array([fCationX, fCationY, fCationZ])
-    fAnion      = gro2si * np.array([fLigandX, fLigandY, fLigandZ])
+    fAnion      = gro2si * np.array([fAnionX, fAnionY, fAnionZ])
     fTotal      = gro2si * np.array([fTotalX, fTotalY, fTotalZ])
-    fTotNoIntra = fTotal - fIntra
+    fTotNoIntra = fCation + fAnion
     return(fIntra, fLigand, fCation, fAnion, fTotNoIntra)
 
 #--get coordinates as gro file--
