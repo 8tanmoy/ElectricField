@@ -4,10 +4,8 @@
 """
 tasks
 _____
-for each time:
-    1. decomposition of electric field
-    2. implement group-based cutoff
-    3. make sure the layer on the opposite side is not taken into account
+calculate just cation+anion electric field on N of MBN as a function of time. See doc for field_space_projection.py
+needs helper bash script
 """
 import shutil
 import matplotlib.pyplot as plt
