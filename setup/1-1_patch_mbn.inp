@@ -1,0 +1,60 @@
+* delete ethyl group and patch mbn to sulfur part 1
+* tanmoy may 2 2020
+*
+
+stream toppar.str
+open read unit 11 card name step3_pbcsetup.psf
+read psf unit 11 card
+
+open read card unit 12 name step3_pbcsetup.crd
+read coor card unit 12
+
+!set nseg = ?nseg
+!define target select all end
+!set segid = ?selsegi
+
+define ethyls select resname ETHY end
+define thiols select resname THSLK end
+
+delete atoms sele ethyls end
+rename resname MBN sele resname THSLK end
+
+open write card unit 10 name test1.psf
+write psf unit 10 card
+
+open write card unit 10 name test1.crd
+write coor unit 10 card
+
+open write card unit 10 name test1.pdb
+write coor unit 10 pdb official
+
+stop
+
+open read unit 11 card name step3_pbcsetup.psf
+read psf unit 11 card
+
+open read card unit 12 name step3_pbcsetup.crd
+read coor card unit 12
+
+
+!ligand patch
+calc ipat = 1
+define ligsulfur sele ( segid LIG .and. resname MBN .and. type S* ) end
+calc ntotlig = ?nsel
+label patlig
+    define sublig sele ligsulfur .subset. @ipat end
+    calc lignum = ?selresi
+    set ligseg = ?selsegi
+    patch L00250 @ligseg @lignum
+    incr ipat by 1
+    if ipat .le. @ntotlig goto patlig
+endif
+
+open write card unit 13 name test1.psf
+write psf unit 13 card
+
+open write card unit 13 name test1.crd
+write coor unit 13 card
+
+open write card unit 13 name test1.pdb
+write coor unit 13 pdb official
